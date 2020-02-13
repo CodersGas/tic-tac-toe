@@ -77,7 +77,7 @@ startBtn.addEventListener('click', () =>{
 resetBtn.addEventListener("click", () =>{
     document.querySelector(".tic-tac-toe-grid").innerHTML = "";
     document.querySelector(".alert-message").innerHTML = "";
-    document.querySelector("h1").innerHTML = "welcome to the arena";
+    document.querySelector("h1").innerHTML = "let's begin";
     document.querySelector(".tic-tac-toe-grid").appendChild(boardCreationAndMarkerSetting.createBoard());
     boardCreationAndMarkerSetting.set();
 });
