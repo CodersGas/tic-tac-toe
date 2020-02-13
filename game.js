@@ -94,8 +94,8 @@ mainMenuBtn.addEventListener("click", () =>{
 
 let boardCreationAndMarkerSetting = {
     createBoard : () =>{
-        var N_size = 3;
-        var board = document.createElement("table");
+        let N_size = 3;
+        let board = document.createElement("table");
     
         for(var i = 0; i < N_size; i++){
           var row = document.createElement("tr");
@@ -125,7 +125,7 @@ let boardCreationAndMarkerSetting = {
 
     set : () => {
         let DataArray = Array(3).fill().map(() => Array(3).fill(0)); 
-        var count = 0;
+        let count = 0;
 
         document.querySelectorAll(".cell").forEach(e => 
             e.addEventListener("click", ()=>{
@@ -180,7 +180,7 @@ let forWinOrDraw = {
     },
 
     winCheck : (array, marker) => {
-        var gotWinner = false;
+        let gotWinner = false;
 
         if(array[0][0] === marker && array[1][1] === marker && array[2][2] === marker){
             gotWinner = true;
@@ -192,7 +192,7 @@ let forWinOrDraw = {
             return gotWinner;
         }
         
-        for(var i = 0; i < 3; i++){
+        for(let i = 0; i < 3; i++){
     
             //check for all rows
             if(array[i][0] === marker && array[i][1] === marker && array[i][2] === marker){
