@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>TIC-TAC-TOE</title>
+        <meta charset="utf-8">
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" 
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="main-css/style.css">
+        <link href="https://fonts.googleapis.com/css?family=Lemonada:400,500&display=swap" rel="stylesheet"> 
+        <link href="https://fonts.googleapis.com/css?family=Odibee+Sans&display=swap" rel="stylesheet"> 
+    </head>
+
+    <body>
+        <div class="heading">
+            <h1>WELCOME TO THE ARENA</h1>
+        </div>
+
+        <div class="method-buttons">
+            <button type="button" class="computer-btn btn1">WITH COMPUTER</button>
+            <button type="button" class="player-btn btn2">WITH FRIEND</button>
+        </div>
+
+        <div class="computer-form">
+            <form>
+                <button class="btn1 easy">Easy</button>
+                <button class="btn2 hard">Hard</button>
+            </form>
+        </div>
+
+        <div class="friend-form">
+            <form>
+                <h6>Player1's Name</h6>
+                <input type="text" class="player1-name" placeholder="player1">
+                <h6>Player 1's marker(X / O) : </h6><input type="text" class="player1-mark marker" placeholder="marker">
+
+                <h6>Player2's Name</h6>
+                <input type="text" class="player2-name" placeholder="player2">
+                <h6>Player 2's marker(X / O) : </h6><input type="text" class="player2-mark marker" placeholder="marker">
+
+                <button type="button" class="start">START</button>
+            </form>
+        </div>
+
+        <div class="tic-tac-toe-grid"></div>
+        <div class="alert-message"></div>
+        <button class="reset" type="button">Play Again</button>
+        <button class="menu" type="button">Main Menu</button>
+    </body>
+    <script src="game.js"></script>
+</html>

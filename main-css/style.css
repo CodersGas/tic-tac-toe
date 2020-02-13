@@ -1,0 +1,140 @@
+body {
+  background-image: url("bgimage.jpg");
+  background-repeat: repeat-y;
+  background-size: cover;
+}
+
+/*Heading*/
+.heading {
+  font-size: 25px;
+  font-family: "Lemonada", cursive;
+  text-align: center;
+  margin-top: 25px;
+  color: white;
+}
+
+/*buttons*/
+.method-buttons {
+  margin-top: 25px;
+  text-align: center;
+}
+.method-buttons button {
+  padding: 8px;
+  font-weight: bold;
+  font-family: "Odibee Sans", cursive;
+  font-size: 18px;
+  color: black;
+}
+.method-buttons .btn1 {
+  background-color: #ffc400;
+  outline: none;
+  margin-right: 10px;
+}
+.method-buttons .btn2 {
+  background-color: #fb8c00;
+  outline: none;
+}
+
+.computer-form form {
+  margin: 25px auto 0 auto;
+  text-align: center;
+  border: 2px solid white;
+  border-radius: 5px;
+  width: 150px;
+  padding: 8px;
+  box-shadow: 3px 3px 5px #fff;
+}
+.computer-form form button {
+  padding: 8px;
+  font-weight: bold;
+  font-family: "Odibee Sans", cursive;
+  font-size: 18px;
+  color: black;
+}
+.computer-form form .btn1 {
+  background-color: #ffc400;
+  outline: none;
+  margin-right: 10px;
+}
+.computer-form form .btn2 {
+  background-color: #fb8c00;
+  outline: none;
+}
+.computer-form form button:hover {
+  transform: scale(1.2, 1.2);
+  transition-duration: 0.3s;
+}
+
+.friend-form form {
+  margin: 25px auto 0 auto;
+  text-align: center;
+  border: 2px solid #fff;
+  box-shadow: 3px 3px 5px #fff;
+  border-radius: 5px;
+  width: 300px;
+  padding: 8px;
+  color: white;
+}
+.friend-form form input {
+  text-transform: capitalize;
+  border-radius: 5px;
+  border: none;
+  padding: 8px;
+  margin-bottom: 10px;
+  font-family: "Lemonada", cursive;
+}
+.friend-form form button {
+  padding: 8px;
+  font-weight: bold;
+  font-family: "Odibee Sans", cursive;
+  font-size: 18px;
+  outline: none;
+  color: black;
+  background-color: #fb8c00;
+}
+.friend-form form button:hover {
+  transform: scale(1.2, 1.2);
+  transition-duration: 0.3s;
+}
+
+/*board style*/
+.tic-tac-toe-grid {
+  margin: 20px auto 0 auto;
+}
+.tic-tac-toe-grid table {
+  border-collapse: collapse;
+  margin: 0 auto;
+}
+.tic-tac-toe-grid table td {
+  background-color: yellow;
+  text-align: center;
+  border: 2px solid black;
+  font-size: 50px;
+  font-weight: bold;
+  color: black;
+  text-transform: uppercase;
+}
+
+/*alert message*/
+.alert-message {
+  text-align: center;
+  font-size: 30px;
+  color: black;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: white;
+}
+
+/*reset button*/
+.reset,
+.menu {
+  display: table;
+  margin: 20px auto;
+  padding: 8px;
+  font-weight: bold;
+  font-family: "Odibee Sans", cursive;
+  font-size: 20px;
+  color: black;
+}
+
+/*# sourceMappingURL=style.css.map */
