@@ -157,10 +157,13 @@ resetBtn.addEventListener("click", () =>{
 });
 
 mainMenuBtn.addEventListener("click", () =>{
+    
     document.querySelector(".player1-name").value = "";
     document.querySelector(".player1-mark").value = "";
     document.querySelector(".player2-name").value = "";
     document.querySelector(".player2-mark").value = "";
+    document.querySelector(".easy-player1-name").value = "";
+    document.querySelector(".easy-player1-mark").value = "";
     location.reload();
 });
 
@@ -299,14 +302,6 @@ let againstComputer = {
             }
         }));
     },
-}
-
-function display(array){
-    for(let i = 0; i < 3; i++){
-        for(let j = 0; j < 3; j++){
-            console.log("arr[" + i + "]" + "[" + j + "]" + array[i][j]);
-        }
-    }
 }
 
 /******** UTILITY FOR CHECKING WINNER AND DRAW IN PLAYER vs PLAYER **********/
