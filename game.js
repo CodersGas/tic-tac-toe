@@ -2,6 +2,7 @@
 
 /************** ALL QUERY SELECTORS ***************/
 const computer_form = document.querySelector(".computer-play-style");
+const methodBtnsDiv = document.querySelector(".method-buttons");
 const friend_form = document.querySelector(".friend-form");
 const computerBtn = document.querySelector(".computer-btn");
 const playerBtn = document.querySelector(".player-btn");
@@ -110,6 +111,7 @@ easyStart.addEventListener("click", () =>{
 
     else{
         easyCompForm.style.display = "none";
+        methodBtnsDiv.style.display = "none";
 
         player1.name = document.querySelector(".easy-player1-name").value;
         player1.marker = document.querySelector(".easy-player1-mark").value;

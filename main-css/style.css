@@ -131,7 +131,8 @@ body {
   color: black;
   font-weight: bold;
   text-transform: uppercase;
-  color: white;
+  color: #fff;
+  font-family: "Coda Caption", sans-serif;
 }
 
 /*reset button*/
