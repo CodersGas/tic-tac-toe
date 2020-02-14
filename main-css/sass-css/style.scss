@@ -54,7 +54,7 @@ $player-button-color: #fb8c00;
     @include buttons-mixin();
 }
 
-.computer-form form{
+.computer-play-style form{
     margin: $margin-top auto 0 auto;
     text-align: $text-position;
     border: 2px solid white;
@@ -71,7 +71,9 @@ $player-button-color: #fb8c00;
     }
 }
 
-.friend-form form{
+.friend-form form,
+.easy-computer-form form,
+.hard-computer-form form{
     margin: $margin-top auto 0 auto;
     text-align: $text-position;
     border: 2px solid #fff;
