@@ -172,12 +172,21 @@ resetBtn.addEventListener("click", () =>{
         boardCreationAndMarkerSetting.set();
     }
 
+    else if(player2.name === "computer" && player2.marker === "x"){
+        document.querySelector(".tic-tac-toe-grid").innerHTML = "";
+        document.querySelector(".alert-message").innerHTML = "";
+        document.querySelector("h1").innerHTML = "let's begin";
+        document.querySelector(".tic-tac-toe-grid").appendChild(boardCreationAndMarkerSetting.createBoard());
+        let compDataArray = Array(3).fill().map(() => Array(3).fill(0));  
+        againstComputer.setHard(compDataArray);
+    }
+
     else{
         document.querySelector(".tic-tac-toe-grid").innerHTML = "";
         document.querySelector(".alert-message").innerHTML = "";
         document.querySelector("h1").innerHTML = "let's begin";
         document.querySelector(".tic-tac-toe-grid").appendChild(boardCreationAndMarkerSetting.createBoard());
-        let compDataArray = Array(3).fill().map(() => Array(3).fill(0));    
+        let compDataArray = Array(3).fill().map(() => Array(3).fill(0));      
         againstComputer.setEasy(compDataArray);
     }
 });
@@ -388,7 +397,7 @@ let againstComputer = {
 }
 
 
-/************************** MINIMAX ALGORITH IMPLEMENTATION FOR TIC TAC TOE **************************************/
+/************************** MINIMAX ALGORITHM IMPLEMENTATION FOR TIC TAC TOE **************************************/
 function bestMove(board, marker){
     //AI will make its move
     let bestScore = -Infinity;
