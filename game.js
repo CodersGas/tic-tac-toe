@@ -1,6 +1,6 @@
 /* form functionality*/
 
-/************** ALL QUERY SELECTORS ***************/
+/***************************************** ALL QUERY SELECTORS ************************************************/
 const computer_form = document.querySelector(".computer-play-style");
 const methodBtnsDiv = document.querySelector(".method-buttons");
 const friend_form = document.querySelector(".friend-form");
@@ -17,7 +17,7 @@ const hardStart = document.querySelector(".comp-hard");
 const easyCompForm = document.querySelector(".easy-computer-form");
 const hardCompForm = document.querySelector(".hard-computer-form");
 
-/***********  Players details *************/
+/*****************************************  Players details ****************************************************/
 var player1 = {
     name: "",
     marker: "",
@@ -28,7 +28,7 @@ var player2 = {
     marker: "",
 }
 
-/*********** ATTRIBUTES HAVING NONE DISPLAY PROPERTY AT START ***************/
+/*********************************** ATTRIBUTES HAVING NONE DISPLAY PROPERTY AT START ****************************/
 computer_form.style.display = "none";
 friend_form.style.display = "none";
 resetBtn.style.display = "none";
@@ -37,7 +37,7 @@ easyCompForm.style.display = "none";
 hardCompForm.style.display = "none";
 
 
-/*************** ALL EVENT LISTENER UTILITIES ***************/
+/************************************** ALL EVENT LISTENER UTILITIES ********************************************/
 
 computerBtn.addEventListener('click', (e) =>{
     if(computer_form.style.display == "none"){
@@ -115,19 +115,15 @@ easyStart.addEventListener("click", () =>{
 
         player1.name = document.querySelector(".easy-player1-name").value;
         player1.marker = document.querySelector(".easy-player1-mark").value;
-        //console.log("Player 1 : " + player1.name);
 
 
         player2.name = "computer";
-        //console.log("Player 2 : " + player2.name);
         if(player1.marker == "x"){
             player2.marker = "o";
         }
         else{
             player2.marker = "x";
         }
-
-        //console.log(player2.name + " : " + player2.marker);
 
         grid_selector.appendChild(boardCreationAndMarkerSetting.createBoard());
         computer_form.style.display = "none";
@@ -137,6 +133,34 @@ easyStart.addEventListener("click", () =>{
         againstComputer.setEasy(compDataArray);
     }
 });
+
+hardStart.addEventListener("click", () =>{
+    if(document.querySelector(".hard-player1-name").value === "" || 
+       (document.querySelector(".hard-player1-mark").value !== "x" && document.querySelector(".hard-player1-mark").value !== "o")){
+
+        alert("Enter valid name or marker value!");
+    }
+
+    else{
+        hardCompForm.style.display = "none";
+        methodBtnsDiv.style.display = "none";
+
+        player1.name = document.querySelector(".hard-player1-name").value;
+        player1.marker = document.querySelector(".hard-player1-mark").value;
+
+
+        player2.name = "computer";
+        player2.marker = "x";
+
+        grid_selector.appendChild(boardCreationAndMarkerSetting.createBoard());
+        computer_form.style.display = "none";
+        document.querySelector("h1").innerHTML = "Let's Begin";
+
+        let hardCompDataArray = Array(3).fill().map(() => Array(3).fill(0));
+        againstComputer.setHard(hardCompDataArray);
+    }
+});
+
 
 resetBtn.addEventListener("click", () =>{
 
@@ -166,10 +190,11 @@ mainMenuBtn.addEventListener("click", () =>{
     document.querySelector(".player2-mark").value = "";
     document.querySelector(".easy-player1-name").value = "";
     document.querySelector(".easy-player1-mark").value = "";
+    document.querySelector(".hard-player1-name").value = "";
     location.reload();
 });
 
-/*********** BOARD CREATION AND MARKER SETTING UTILITY ************/
+/*********************************** BOARD CREATION AND MARKER SETTING UTILITY ***********************************/
 
 let boardCreationAndMarkerSetting = {
     createBoard : () =>{
@@ -245,12 +270,11 @@ let boardCreationAndMarkerSetting = {
     },
 }
 
-/********************** PLAYER vs COMPUTER ***************************/
+/************************************* PLAYER vs COMPUTER *****************************************************/
 
 let againstComputer = {
     setEasy : (compDataArray) =>{
-        let DataArray = Array(3).fill().map(() => Array(3).fill(0));
-
+        
         let count = 0;
         
 
@@ -304,9 +328,190 @@ let againstComputer = {
             }
         }));
     },
+
+    setHard : (hardCompDataArray) => {
+        let count = 0;
+        
+
+        if(document.querySelector(".alert-message").innerHTML === "It's " + player2.name + "'s turn"){
+
+            count = count + 1;
+            
+            let indexes = bestMove(hardCompDataArray, player2.marker);
+            console.log(indexes);
+
+            if((document.querySelector("table").children[indexes.i]).children[indexes.j].innerHTML === ""){
+                
+                (document.querySelector("table").children[indexes.i]).children[indexes.j].click();
+                (document.querySelector("table").children[indexes.i]).children[indexes.j].innerHTML = player2.marker;
+
+                hardCompDataArray[indexes.i][indexes.j] = player2.marker;
+                
+                if(forWinOrDraw.winCheck(hardCompDataArray, player2.marker) === true){
+                    forWinOrDraw.winner(player2.marker);
+                    return;
+                }
+
+                if(forWinOrDraw.checkDrawCondition(count)) return;
+                document.querySelector(".alert-message").innerHTML = "It's " + player1.name + "'s turn";
+            }
+
+            else{
+                againstComputer.setHard(hardCompDataArray);
+            }
+
+        }
+
+        document.querySelectorAll(".cell").forEach(e => 
+            e.addEventListener("click", ()=>{
+            
+            count = count + 1;
+
+            if(document.querySelector(".alert-message").innerHTML === "It's " + player1.name + "'s turn" || document.querySelector(".alert-message").innerHTML === ""){
+                if(e.innerHTML === ""){
+                    e.innerHTML = player1.marker;
+                    hardCompDataArray[e.parentElement.className][e.id] = player1.marker;
+
+                    if(forWinOrDraw.winCheck(hardCompDataArray, player1.marker) === true){
+                        forWinOrDraw.winner(player1.marker);
+                        return;
+                    }
+                    
+                    if(forWinOrDraw.checkDrawCondition(count)) return;
+                    document.querySelector(".alert-message").innerHTML = "It's " + player2.name + "'s turn";
+                    againstComputer.setHard(hardCompDataArray);
+                }
+            }
+        }));
+        return hardCompDataArray;
+    },
 }
 
-/******** UTILITY FOR CHECKING WINNER AND DRAW IN PLAYER vs PLAYER **********/
+
+/************************** MINIMAX ALGORITH IMPLEMENTATION FOR TIC TAC TOE **************************************/
+function bestMove(board, marker){
+    //AI will make its move
+    let bestScore = -Infinity;
+    let move;
+
+    for(let i = 0; i < 3; i++){
+        for(let j = 0; j < 3; j++){
+            //is the spot available
+            if(board[i][j] === 0){
+                board[i][j] = marker;
+                let score = minimax(board, 0, false);
+                console.log("Score : " + score);
+                board[i][j] = 0;
+
+                if(score > bestScore){
+                    bestScore = score;
+                    move = {i, j};
+                }
+            }
+        }
+    }
+
+    return move;
+}
+
+let score = {
+    x : 1,
+    o: -1,
+    tie: 0,
+}
+
+function minimax(board, depth, isMaximizing){
+    let result = checkWinner(board);
+    
+    if(result !== null){
+        return score[result];
+    }
+
+    if(isMaximizing){
+        let bestScore = -Infinity;
+        for(let i = 0; i < 3; i++){
+            for(let j = 0; j < 3; j++){
+                //is spot available
+                if(board[i][j] == 0){
+                    board[i][j] = player2.marker;
+                    let score = minimax(board, depth+1, false);
+                    board[i][j] = 0;
+
+                    bestScore = Math.max(score, bestScore);
+                }  
+            }
+        }
+        //console.log("bestScore for ai: " + bestScore);
+        return bestScore;
+    }
+
+    else{
+        let bestScore = Infinity;
+        for(let i = 0; i < 3; i++){
+            for(let j = 0; j < 3; j++){
+                //is spot available
+                if(board[i][j] == 0){
+                    board[i][j] = player1.marker;
+                    let score = minimax(board, depth+1, true);
+                    board[i][j] = 0;
+
+                    bestScore = Math.min(score, bestScore);
+                }  
+            }
+        }
+        //console.log("bestScore for human: " + bestScore);
+        return bestScore;
+    }
+}
+//winner checking for ai
+function equals3(a, b, c){
+    return a == b && b == c && a != 0;
+}
+
+function checkWinner(board){
+    let winner = null;
+
+    //horizontally
+    for(let i = 0; i < 3; i++){
+        if(equals3(board[i][0], board[i][1], board[i][2])){
+            winner = board[i][0];
+        }
+    }
+
+    //vertically
+    for(let i = 0; i < 3; i++){
+        if(equals3(board[0][i], board[1][i], board[2][i])){
+            winner = board[0][i];
+        }
+    }
+
+    //diagonals
+    if(equals3(board[0][0], board[1][1], board[2][2])){
+        winner = board[0][0];
+    }
+
+    if(equals3(board[2][0], board[1][1], board[0][2])){
+        winner = board[2][0];
+    }
+
+    let openSpots = 0;
+    for(let i = 0; i < 3; i++){
+        for(let j = 0; j < 3; j++){
+            if(board[i][j] == 0){
+                openSpots++;
+            }
+        }
+    }
+
+    if(winner == null && openSpots == 0){
+        return 'tie';
+    }
+    else{
+        return winner;
+    }
+}
+
+/******************************** UTILITY FOR CHECKING WINNER AND DRAW ***************************************/
 
 let forWinOrDraw = {
 
